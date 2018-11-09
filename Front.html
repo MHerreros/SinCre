@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>VELOCIMETER</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./FrontStyle.css">
+  <link rel="icon"href="https://png.icons8.com/ios/1600/speedometer.png">
+
+<script>
+window.onload = function() {
+
+var dataPoints = [];
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2",
+	title: {
+		text: "Live Data"
+	},
+	data: [{
+		type: "line",
+		dataPoints: dataPoints
+	}]
+});
+updateData();
+
+// Initial Values
+var xValue = 0;
+var yValue = 10;
+var newDataCount = 6;
+
+function addData(data) {
+	if(newDataCount != 1) {
+		$.each(data, function(key, value) {
+			dataPoints.push({x: value[0], y: parseInt(value[1])});
+			xValue++;
+			yValue = parseInt(value[1]);
+		});
+	} else {
+		//dataPoints.shift();
+		dataPoints.push({x: data[0][0], y: parseInt(data[0][1])});
+		xValue++;
+		yValue = parseInt(data[0][1]);
+	}
+
+	newDataCount = 1;
+	chart.render();
+	setTimeout(updateData, 1500);
+}
+
+function updateData() {
+	addData([[0, 1], [1, 2], [2, 3]]);
+}
+
+}
+</script>
+</head>
+<body  id="backpic" background="https://images.wallpaperscraft.com/image/lamborghini_aventador_lp700_4_white_paving_tiles_sky_clouds_94552_1680x1050.jpg" background="fixed">
+  <div class="header">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Animated_Aston_Martin_Speedometer.gif/220px-Animated_Aston_Martin_Speedometer.gif" height="100" id="logo">
+      <h1>SPEED CONTROL
+      </h1>
+  </div>
+  <div class="vel">
+    <p> CURRENT SPEED:
+    </p>
+    <div class="speed-results" id="speed-value">0</div>
+    <div class="m-min" id="speed-units">m/min</div>
+  </div>
+<div id="chartContainer" style="height: 300px; width: 80%;"></div>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+</body>
+</html>

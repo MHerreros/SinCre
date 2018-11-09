@@ -1,0 +1,57 @@
+h1{
+  color:navy;
+  font-family: Helvetica,arial,sans-serif;
+  font-style: oblique;
+  font-weight: 900;
+  font-size: 200;
+  text-align:center;
+}
+p{
+  color: powderblue;
+  font-family: serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 200
+}
+.header{
+  background-color: #f7f7f7a8;
+  /*float:left;*/
+  padding-left: 30px;
+  padding-right: 30px;
+  /*height: auto;*/
+  background-size:cover;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
+.vel{
+  background-color: #0000008f;
+  width: 1020px;
+  font-family: monospace;
+  color: white;
+  font-size: 20px;
+  margin-left: 50px;
+  margin-right: 10px;
+  margin-top: 20px;
+  float:left;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.speed-results{
+  font-size: 19vw;
+  text-align: center;
+}
+.m-min{
+  text-align: left;
+}
+#logo{
+  float: left;
+  padding-left: 10px
+}
+#chartContainer{
+  padding-top: 30px;
+  padding-left: 50px;
+  float: left;
+}
