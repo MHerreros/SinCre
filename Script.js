@@ -46,7 +46,7 @@ function updateData() {
     //console.log(res);
     return res.json()
   }).then((json) => {
-    var datos = req.body.array;
+    var datos = req.?????;
     addData(datos)
   };
 };
