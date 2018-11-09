@@ -20,6 +20,7 @@ var yValue = 10;
 var newDataCount = 6;
 
 function addData(data) {
+
 	if(newDataCount != 1) {
 		$.each(data, function(key, value) {
 			dataPoints.push({x: value[0], y: parseInt(value[1])});
@@ -49,3 +50,14 @@ function updateData() {
     addData(datos)
   };
 };
+function updateSpeed() {
+fetch('http://localhost:3000/liveSpeed')
+.then((res) => {
+  //console.log(res);
+  return res.json()
+}).then((json) => {
+  var vel = req.body.speed
+  document.getElementById('speed-value').innerHTML = vel
+})
+};
+setTimeout(updateSpeed,1000);
