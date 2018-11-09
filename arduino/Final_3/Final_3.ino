@@ -1,6 +1,7 @@
     
     //// INICIALIZAR LCD ////
     #include <LiquidCrystal.h>      // include the library code
+    
     #include <ModbusSlave.h>
     
     const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 6, d7 = 7;    // initialize the library by associating any needed LCD interface pin with the arduino pin number it is connected to
@@ -14,7 +15,7 @@
      */
     #define SLAVE_ID 1
     #define CTRL_PIN 2
-    #define BAUDRATE 57600
+    #define BAUDRATE 9600
     
     /**
      *  Modbus object declaration
@@ -37,7 +38,7 @@ void setup() {
     lcd.begin(16, 2);   // set up the LCD's number of columns and rows:
     
     //// SETEO DE ENCODER ////  
-    Serial.begin(BAUDRATE);
+    
     attachInterrupt(0,interrupcion0,RISING);  // Interrupcion 0 (pin2) 
 
     slave.cbVector[CB_WRITE_COILS] = writeDigitalOut;
@@ -45,6 +46,7 @@ void setup() {
     slave.cbVector[CB_READ_REGISTERS] = readAnalogIn;
 
     // set Serial and slave at baud 57600.
+    Serial.begin(BAUDRATE);
     slave.begin(BAUDRATE);
  }
 

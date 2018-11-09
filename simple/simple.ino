@@ -1,3 +1,5 @@
+#include <ModbusSlave.h>
+
 /*
     Modbus slave simple example
 
@@ -29,7 +31,7 @@
 /* slave id = 1, rs485 control-pin = 8, baud = 9600
  */
 #define SLAVE_ID 1
-#define CTRL_PIN 8
+#define CTRL_PIN 4
 #define BAUDRATE 9600
 
 /**
@@ -44,7 +46,7 @@ void setup() {
     pinMode(11, OUTPUT);
     pinMode(12, OUTPUT);
     pinMode(13, OUTPUT);
-    pinMode(4,OUTPUT);
+    pinMode(4,INPUT);
 
     /* register handler functions
      * into the modbus slave callback vector.
@@ -66,10 +68,8 @@ void loop() {
      * call the user handler function.
      */
     slave.poll();
-    digitalWrite(4,HIGH);
-    delay(7000);
-    digitalWrite(4,LOW);
-    delay(7000);
+   
+    
 }
 
 /**
@@ -96,6 +96,7 @@ uint8_t writeDigitalOut(uint8_t fc, uint16_t address, uint16_t length) {
  */
 uint8_t readDigitalIn(uint8_t fc, uint16_t address, uint16_t length) {
     // read digital input
+    Serial.print("READING");
     for (int i = 0; i < length; i++) {
         slave.writeCoilToBuffer(i, digitalRead(address + i));
     }
