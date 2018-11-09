@@ -39,7 +39,13 @@ function addData(data) {
 }
 
 function updateData() {
-	addData([[0, 1], [1, 2], [2, 3]]);
-}
-
-}
+	//addData([[0, 1], [1, 2], [2, 3]]);
+  fetch('http://localhost:3000/catch')
+  .then((res) => {
+    //console.log(res);
+    return res.json()
+  }).then((json) => {
+    var datos = req.body.array;
+    addData(datos)
+  };
+};
