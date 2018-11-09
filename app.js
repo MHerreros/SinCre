@@ -38,22 +38,7 @@ dbObject.createCollection("speed", function(err, response){
 
 
 app.get('/catch', function (req, res){
-  var speedArray = []; //Array vacio donde vamos a incluir las velocidades medidas.
-  var arduinoSpeed =; //req.body.message;  //DATO DEL ARDUINO
-
-  speedArray.push (arduinoSpeed) //agrego el valor recibido al array.
-  console.log (speedArray)
-
-//Para eliminar datos del array
-//n define la cantidad de elementos a eliminar,
-//de esa posicion(pos) en adelante hasta el final del array.
-  var pos = 1, n = speedArray.length-10 ;
-  var elementosEliminados = speedArray.splice(pos, n);
-  console.log(speedArray);
-
-  //list.push(inputValue);
-  //console.log(req.body);
-  //console.log(list);
+  
 
   //Abrir conexion con la base de datos
   MongoClient.connect(url, function (err, db) {
