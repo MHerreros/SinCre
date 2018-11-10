@@ -48,7 +48,7 @@ function updateData() {
   }).then((data) => {
 
 		const mappedData = data.map((element, index)=>{
-			return [index, element.speed]
+			return [index+1, element.speed]
 		});
 		document.getElementById('speed-value').innerHTML = data [data.length-1].speed
     addData(mappedData)

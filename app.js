@@ -56,9 +56,10 @@ app.get('/catch', function (req, res){
       //res.json(docs);
       //console.log(docs);
       //res.json([{speed: docs}]) //FEDEEE AYUDAAAAAA!!!!
-    res.json([{speed:docs.speed}])
+      //docs[1,0].speed
+    res.json([{speed:docs[docs.length-1].speed}])
     //var asd={asd: docs.date};
-    console.log("Found the following records: ",docs[1][1]);
+    console.log("Found the following records: ",docs[docs.length-1].speed);
       db.close();
     });
   }); //cierra MongoClient

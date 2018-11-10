@@ -20,7 +20,9 @@ void loop() {
 uint8_t ReadAnalogIn(uint8_t fc, uint16_t address, uint16_t length) {
         // write registers into the answer buffer
    for (int i = 0; i < length; i++) {
-      slave.writeRegisterToBuffer(0, 150);
+    int value = analogRead(1);
+
+      slave.writeRegisterToBuffer(0, value);
     }
     return STATUS_OK;
 }
