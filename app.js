@@ -10,11 +10,11 @@ var array = [2, 3, 5]
 
 const findDocuments = function(db, callback) {
   // Get the documents collection
-  const collection = db.collection('documents');
+  const collection = db.collection('speed');
   // Find some documents
   collection.find({}).toArray(function(err, docs) {
-    console.log("Found the following records");
-    console.log(docs)
+    // console.log("Found the following records: ",docs);
+    // console.log(docs)
     callback(docs);
     //la lista esta armada en docs
   });
@@ -54,9 +54,11 @@ app.get('/catch', function (req, res){
 
     findDocuments(dbo, function(docs){
       //res.json(docs);
-      console.log(docs);
-      res.json([{speed: docs}]) //FEDEEE AYUDAAAAAA!!!!
-
+      //console.log(docs);
+      //res.json([{speed: docs}]) //FEDEEE AYUDAAAAAA!!!!
+    res.json([{speed:docs.speed}])
+    //var asd={asd: docs.date};
+    console.log("Found the following records: ",docs[1][1]);
       db.close();
     });
   }); //cierra MongoClient
