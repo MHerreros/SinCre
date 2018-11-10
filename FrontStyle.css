@@ -1,7 +1,7 @@
 h1{
   color:navy;
   font-family: Helvetica,arial,sans-serif;
-  font-style: oblique;
+  font-style: normal;
   font-weight: 900;
   font-size: 200;
   text-align:center;
@@ -28,7 +28,7 @@ p{
 
 .vel{
   background-color: #0000008f;
-  width: 1020px;
+  width: 40%;
   font-family: monospace;
   color: white;
   font-size: 20px;
@@ -53,5 +53,7 @@ p{
 #chartContainer{
   padding-top: 30px;
   padding-left: 50px;
-  float: left;
+
+  margin-right: 50px;
+  float: right;
 }
