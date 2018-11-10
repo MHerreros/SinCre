@@ -1,6 +1,6 @@
 window.onload = function() {
 
-var dataPoints = [];
+	var dataPoints = [];
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	theme: "light2",
@@ -16,7 +16,7 @@ updateData();
 
 // Initial Values
 var xValue = 0;
-var yValue = 10;
+var yValue = 0;
 var newDataCount = 6;
 
 function addData(data) {
@@ -45,19 +45,25 @@ function updateData() {
   .then((res) => {
     //console.log(res);
     return res.json()
-  }).then((json) => {
-    var datos = req.?????;
-    addData(datos)
-  };
+  }).then((data) => {
+
+		const mappedData = data.map((element, index)=>{
+			return [index, element.speed]
+		});
+    addData(mappedData)
+
+  });
 };
 function updateSpeed() {
-fetch('http://localhost:3000/liveSpeed')
-.then((res) => {
+	fetch('http://localhost:3000/liveSpeed')
+	.then((res) => {
   //console.log(res);
-  return res.json()
-}).then((json) => {
-  var vel = req.body.speed
-  document.getElementById('speed-value').innerHTML = vel
-})
+  	return res.json()
+	}).then((json) => {
+		console.log(json)
+  // var vel = req.body.speed
+  // document.getElementById('speed-value').innerHTML = vel
+	});
 };
 setTimeout(updateSpeed,1000);
+};
