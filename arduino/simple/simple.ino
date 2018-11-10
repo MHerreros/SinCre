@@ -26,92 +26,48 @@
 
 #include <ModbusSlave.h>
 
-/* slave id = 1, rs485 control-pin = 8, baud = 9600
- */
-#define SLAVE_ID 1
-#define CTRL_PIN 8
-#define BAUDRATE 9600
-
-/**
- *  Modbus object declaration
- */
-Modbus slave(SLAVE_ID, CTRL_PIN);
-
+// implicitly set stream to use the Serial serialport
+Modbus slave(1, 9); // [stream = Serial,] slave id = 1, rs485 control-pin = 8
+bool on = false;
 void setup() {
-    /* set some pins for output
-     */
-    pinMode(10, INPUT);
-    pinMode(11, OUTPUT);
-    pinMode(12, OUTPUT);
-    pinMode(13, OUTPUT);
-    pinMode(4,OUTPUT);
-
-    /* register handler functions
-     * into the modbus slave callback vector.
-     */
-    slave.cbVector[CB_WRITE_COILS] = writeDigitalOut;
-    slave.cbVector[CB_READ_COILS] = readDigitalIn;
-    slave.cbVector[CB_READ_REGISTERS] = readAnalogIn;
-
-    // set Serial and slave at baud 9600.
-    Serial.begin( BAUDRATE );
-    slave.begin( BAUDRATE );
+    // register one handler functions
+    // if a callback handler is not assigned to a modbus command 
+    // the default handler is called. 
+    // default handlers return a valid but empty replay.
+    //slave.cbVector[FC_READ_COILS] = writeDigitlOut;
+    //slave.cbVector[FC_READ_DISCRETE_INPUT] = writeDigitlOut;
+    //slave.cbVector[CB_READ_REGISTERS] = writeDigitlOut;
+    //slave.cbVector[FC_WRITE_COIL] = writeDigitlOut;
+    //slave.cbVector[FC_WRITE_REGISTER] = writeDigitlOut;
+    //slave.cbVector[FC_WRITE_MULTIPLE_COILS] = writeDigitlOut;
+    //slave.cbVector[FC_WRITE_MULTIPLE_REGISTERS] = writeDigitlOut;
+    slave.cbVector[CB_READ_REGISTERS] = ReadAnalogIn;
+    pinMode(9, OUTPUT);
+    // start slave at baud 9600 on Serial
+    Serial.begin( 9600 ); // baud = 9600
+    slave.begin( 9600 );
 }
 
 void loop() {
-    /* listen for modbus commands con serial port
-     *
-     * on a request, handle the request.
-     * if the request has a user handler function registered in cbVector
-     * call the user handler function.
-     */
+    // listen for modbus commands con serial port
     slave.poll();
-    digitalWrite(4,HIGH);
-    delay(7000);
-    digitalWrite(4,LOW);
-    delay(7000);
+    if (on) digitalWrite(9, HIGH);
 }
-
-/**
- * Handle Force Single Coil (FC=05) and Force Multiple Coils (FC=15)
- * set digital output pins (coils).
- */
-uint8_t writeDigitalOut(uint8_t fc, uint16_t address, uint16_t length) {
-    // set digital pin state(s).
-    for (int i = 0; i < length; i++) {
-        digitalWrite(address + i, slave.readCoilFromBuffer(i));
+uint8_t ReadAnalogIn(uint8_t fc, uint16_t address, uint16_t length) {
+    
+    // write registers into the answer buffer
+   for (int i = 0; i < length; i++) {
+      slave.writeRegisterToBuffer(0, 90);
     }
-
     return STATUS_OK;
 }
-
-/**
- * Handel Read Input Status (FC=02/01)
- * write back the values from digital in pins (input status).
- *
- * handler functions must return void and take:
- *      uint8_t  fc - function code
- *      uint16_t address - first register/coil address
- *      uint16_t length/status - length of data / coil status
- */
-uint8_t readDigitalIn(uint8_t fc, uint16_t address, uint16_t length) {
-    // read digital input
-    for (int i = 0; i < length; i++) {
-        slave.writeCoilToBuffer(i, digitalRead(address + i));
-    }
-
-    return STATUS_OK;
-}
-
-/**
- * Handel Read Input Registers (FC=04/03)
- * write back the values from analog in pins (input registers).
- */
-uint8_t readAnalogIn(uint8_t fc, uint16_t address, uint16_t length) {
-    // read analog input
-    for (int i = 0; i < length; i++) {
-        slave.writeRegisterToBuffer(i, analogRead(address + i));
-    }
-
-    return STATUS_OK;
-}
+// Handel Force Single Coil (FC=05)
+//uint8_t writeDigitlOut(uint8_t fc, uint16_t address, uint16_t length) {
+//    on = true;
+  //  if (slave.readCoilFromBuffer(0) == HIGH) {
+    //    digitalWrite(address, HIGH);
+    //} else {
+      //  digitalWrite(address, HIGH);
+    //}
+    //return STATUS_OK;
+//}
