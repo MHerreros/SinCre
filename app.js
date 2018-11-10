@@ -56,6 +56,7 @@ app.get('/catch', function (req, res){
       db.close();
       //res.json(docs);
       res.json([{speed:5}, {speed:10}])
+
     });
   }); //cierra MongoClient
 }); //cierra app.get

@@ -50,20 +50,20 @@ function updateData() {
 		const mappedData = data.map((element, index)=>{
 			return [index, element.speed]
 		});
+		document.getElementById('speed-value').innerHTML = data [data.length-1].speed
     addData(mappedData)
 
   });
 };
-function updateSpeed() {
-	fetch('http://localhost:3000/liveSpeed')
-	.then((res) => {
-  //console.log(res);
-  	return res.json()
-	}).then((json) => {
-		console.log(json)
-  // var vel = req.body.speed
-  // document.getElementById('speed-value').innerHTML = vel
-	});
-};
-setTimeout(updateSpeed,1000);
+// function updateSpeed() {
+// 	fetch('http://localhost:3000/liveSpeed')
+// 	.then((res) => {
+//   //console.log(res);
+//   	return res.json()
+// 	}).then((json) => {
+// 		console.log(json)
+//    var vel = req.body.speed
+// 	});
+// };
+// setTimeout(updateSpeed,1000);
 };
