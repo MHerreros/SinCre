@@ -20,7 +20,11 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "jsmodbus": "^3.1.0",
+<<<<<<< HEAD
     "modbus-rtu": "^0.2.1",
+=======
+    "mongodb": "^3.1.9",
+>>>>>>> 3a48df8ed2822c55e00e57dd7e0adc5b89208fbf
     "serialport": "^7.0.2"
   }
 }
