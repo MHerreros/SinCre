@@ -1,41 +1,9 @@
-// 'use strict'
-//
-// let modbus = require('jsmodbus')
-// let Serialport = require('serialport')
-// let socket = new Serialport('COM3', {
-//   baudRate: 9600,
-//   Parity: 'none',
-//   stopBits: 1,
-//   dataBits: 8
-// })
-//
-// const write = () => {
-//   client.readInputRegisters(1, 1).then(function (resp) {
-//     console.log(resp);
-//       console.log("PASO 3");
-//     socket.close();
-//   }, function (err) {
-//     write();
-//     console.log(err)
-//   })
-// }
-// // set Slave PLC ID
-// let client = new modbus.client.RTU(socket, 1)
-//   console.log("PASO 1");
-// socket.on('open', function () {
-//   console.log("PASO 2");
-//   write();
-// }, function (err) {
-//   console.log(err)
-//   socket.close()
-// })
-//
-// socket.on('error', function (err) {
-//   console.log(err)
-// })
-
 const SerialPort = require('serialport');
 const {ModbusMaster, DATA_TYPES} = require('modbus-rtu');
+var MongoClient=require('mongodb').MongoClient
+const {ObjectId} = require('mongodb');
+
+var url="mongodb://localhost:27017/"
 
 //create serail port with params. Refer to node-serialport for documentation
 const serialPort = new SerialPort("COM3", {
@@ -48,15 +16,38 @@ const master = new ModbusMaster(serialPort, {
   debug: true
 });
 
+setInterval(function(){
+
 //Read from slave with address 1 four holding registers starting from 0.
 master.writeSingleRegister(1, 0, 1).then((data) => {
     //promise will be fulfilled with parsed data
     console.log("DATA: ", data); //output will be [10, 100, 110, 50] (numbers just for example)
     master.readHoldingRegisters(1, 0,1, DATA_TYPES.UINT).then((data) => {
     // data will be treat as unsigned integer
+    //
+    MongoClient.connect(url, function(err,db){
+      if (err) throw err;
+      //accedo a la base de datos antiguamente creada
+      var dbo=db.db("speedDB");
+      var myobj= {speed:data, date:Date.now()};
+      console.log(myobj);
+      //accedo a la collection e inserto un elemento
+      dbo.collection("speed").insertOne(myobj, function(err,response){
+        //console.log("1 document inserted");
+        db.close();
+        if (err){
+          console.log(err);
+        }
+        else {
+          console.log("Se ha insertado satisfactoriamente");
+        };
+      });
+    });
+
     console.log(data); //output will be [20, 100, 110, 50] (numbers just for example)
 });
 }, (err) => {
   console.log(err);
     //or will be rejected with error
 });
+}, 3000);

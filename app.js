@@ -53,10 +53,11 @@ app.get('/catch', function (req, res){
     var dbo = db.db("speedDB");
 
     findDocuments(dbo, function(docs){
-      db.close();
       //res.json(docs);
-      res.json([{speed:5}, {speed:10}])
+      console.log(docs);
+      res.json([{speed: docs}]) //FEDEEE AYUDAAAAAA!!!!
 
+      db.close();
     });
   }); //cierra MongoClient
 }); //cierra app.get
