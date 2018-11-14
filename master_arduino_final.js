@@ -50,4 +50,4 @@ master.writeSingleRegister(1, 0, 1).then((data) => {
   console.log(err);
     //or will be rejected with error
 });
-}, 3000);
+}, 1500);
