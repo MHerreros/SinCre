@@ -52,31 +52,11 @@ app.get('/catch', function (req, res){
     var dbo = db.db("speedDB");
 
     findDocuments(dbo, function(docs){
-      //res.json(docs);
-      //console.log(docs);
-      //res.json([{speed: docs}]) //FEDEEE AYUDAAAAAA!!!!
-      //docs[1,0].speed
-    res.json([{speed:docs[docs.length-1].speed}])
+
+      res.json([{speed:docs[docs.length-1].speed}])
     //var asd={asd: docs.date};
-    console.log("Found the following records: ",docs[docs.length-1].speed);
+      console.log("Found the following records: ",docs[docs.length-1].speed);
       db.close();
-    });
-  }); //cierra MongoClient
-}); //cierra app.get
-
-
-app.get('/liveSpeed', function (req, res){
-  //Abrir conexion con la base de datos
-  MongoClient.connect(url, function (err, db) {
-    if (err) {
-      console.log('Error!', err);
-    }
-    //accedo a la base de datos previamente creada
-    var dbo = db.db("speedDB");
-
-    findDocuments(dbo, function(docs){
-      db.close();
-      res.json(docs);
     });
   }); //cierra MongoClient
 }); //cierra app.get
