@@ -6,7 +6,6 @@ var app=express();//a express le digo a que quiero que escuche
 app.use(cors());
 app.use(express.json());
 
-var array = [2, 3, 5]
 
 const findDocuments = function(db, callback) {
   // Get the documents collection

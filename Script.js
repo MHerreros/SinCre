@@ -29,7 +29,7 @@ function addData(data) {
 		});
 	} else {
 		//dataPoints.shift();
-		dataPoints.push({x: data[0][0], y: parseInt(data[0][1])});
+		dataPoints.push({x: xValue, y: parseInt(data[0][1])});
 		xValue++;
 		yValue = parseInt(data[0][1]);
 	}
