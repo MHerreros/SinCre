@@ -49,5 +49,6 @@ master.writeSingleRegister(1, 0, 1).then((data) => {
 }, (err) => {
   console.log(err);
     //or will be rejected with error
+    //Prueba
 });
 }, 1500);
