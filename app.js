@@ -1,4 +1,6 @@
+//     ¡¡NO BORRAR!!
 //https://stackoverflow.com/questions/20796714/how-do-i-start-mongo-db-from-windows
+//"C:\Program Files\MongoDB\Server\4.0\bin\mongod" --bind_ip 127.0.0.1,0.0.0.0
 
 var express=require('express');
 var cors = require('cors');
