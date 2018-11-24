@@ -1,3 +1,5 @@
+//https://stackoverflow.com/questions/20796714/how-do-i-start-mongo-db-from-windows
+
 var express=require('express');
 var cors = require('cors');
 var app=express();//a express le digo a que quiero que escuche
