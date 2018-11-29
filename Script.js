@@ -41,7 +41,7 @@ function addData(data) {
 
 function updateData() {
 	//addData([[0, 1], [1, 2], [2, 3]]);
-  fetch('http://localhost:3000/catch')
+  fetch('http://172.22.33.224:3000/catch')
   .then((res) => {
     //console.log(res);
     return res.json()
@@ -55,15 +55,4 @@ function updateData() {
 
   });
 };
-// function updateSpeed() {
-// 	fetch('http://localhost:3000/liveSpeed')
-// 	.then((res) => {
-//   //console.log(res);
-//   	return res.json()
-// 	}).then((json) => {
-// 		console.log(json)
-//    var vel = req.body.speed
-// 	});
-// };
-// setTimeout(updateSpeed,1000);
 };
