@@ -24,7 +24,7 @@ const findDocuments = function(db, callback) {
 }
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://172.22.37.254:27017/";
+var url = "mongodb://172.22.37.254:27017/"; //IP JOACO (base de datos)
 const collectionName = "speed"
 
 //Crear la base de datos y una collection
