@@ -8,7 +8,7 @@ var app=express();//a express le digo a que quiero que escuche
 
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); //JSON=JavaScript Object Notation
 
 
 const findDocuments = function(db, callback) {
@@ -24,7 +24,7 @@ const findDocuments = function(db, callback) {
 }
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://172.22.37.254:27017/"; //IP JOACO (base de datos)
+var url = "mongodb://172.22.37.143:27017/"; //IP JOACO (base de datos)
 const collectionName = "speed"
 
 //Crear la base de datos y una collection
@@ -46,7 +46,7 @@ MongoClient.connect(url, function(err, db){
 });
 
 
-app.get('/catch', function (req, res){
+app.get('/catch', function (req, res){ // cuando el servidor recibe un pedido a /catch se ejecuta la funcion
   //Abrir conexion con la base de datos
   MongoClient.connect(url, function (err, db) {
     if (err) {
