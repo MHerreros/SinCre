@@ -3,10 +3,10 @@ const {ModbusMaster, DATA_TYPES} = require('modbus-rtu');
 var MongoClient=require('mongodb').MongoClient
 const {ObjectId} = require('mongodb');
 
-var url="mongodb://172.22.33.10:27017/"
+var url="mongodb://172.22.37.254:27017/"
 
 //create serail port with params. Refer to node-serialport for documentation
-const serialPort = new SerialPort("COM5", {
+const serialPort = new SerialPort("COM3", {
    baudRate: 9600
 });
 
