@@ -24,15 +24,15 @@ master.writeSingleRegister(1, 0, 1).then((data) => {//Si bien necesitamos leer y
     console.log("DATA: ", data); //output will be [10, 100, 110, 50] (numbers just for example)
     master.readHoldingRegisters(1, 0,1, DATA_TYPES.UINT).then((data) => {//Funcion que lee la información que birnda el Slave. Lee el SLAVE 1, desde el registro 0 hasta el 1. Y los datos que toma los interpreta como Unsigned Integer
     // data will be treat as unsigned integer
-    //
+    //Cuando recibe el DATA del slave, lo inserta en la base de datos.
     MongoClient.connect(url, function(err,db){
       if (err) throw err;
       //accedo a la base de datos antiguamente creada
       var dbo=db.db("speedDB");
-      var myobj= {speed:data, date:Date.now()};
+      var myobj= {speed:data, date:Date.now()}; //Creo un objeto que tiene un atributo que contiene el dato de volicidad que me traje del slave y la fecha
       console.log(myobj);
       //accedo a la collection e inserto un elemento
-      dbo.collection("speed").insertOne(myobj, function(err,response){
+      dbo.collection("speed").insertOne(myobj, function(err,response){//Inserto el objeto nuevo en la base de datos
         //console.log("1 document inserted");
         db.close();
         if (err){
