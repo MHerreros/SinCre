@@ -57,7 +57,7 @@ app.get('/catch', function (req, res){ // cuando el servidor recibe un pedido a 
 
     findDocuments(dbo, function(docs){
 
-      res.json([{speed:docs[docs.length-1].speed}])
+      res.json([{speed:docs[docs.length-1].speed}]) //me da el speed en vivo
     //var asd={asd: docs.date};
       console.log("Found the following records: ",docs[docs.length-1].speed);
       db.close();
