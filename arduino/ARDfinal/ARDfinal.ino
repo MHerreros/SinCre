@@ -18,13 +18,13 @@ void loop() {
     //int PWM = pulseIn(9,HIGH);
     //Serial.println(PWM);
 }
-
-uint8_t ReadAnalogIn(uint8_t fc, uint16_t address, uint16_t length) {
+    
+  uint8_t ReadAnalogIn(uint8_t fc, uint16_t address, uint16_t length) {
         // write registers into the answer buffer
    for (int i = 0; i < length; i++) {
-    int value = analogRead(1);
+   int value = analogRead(1);
     //int PWM = pulseIn(1,HIGH);
-    //Serial.println(PWM);
+    //Serial.println(value);
       slave.writeRegisterToBuffer(0, value);
     }
     return STATUS_OK;
